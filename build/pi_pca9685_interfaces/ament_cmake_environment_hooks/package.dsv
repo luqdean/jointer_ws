@@ -1,0 +1,4 @@
+source;share/pi_pca9685_interfaces/local_setup.bash
+source;share/pi_pca9685_interfaces/local_setup.dsv
+source;share/pi_pca9685_interfaces/local_setup.sh
+source;share/pi_pca9685_interfaces/local_setup.zsh

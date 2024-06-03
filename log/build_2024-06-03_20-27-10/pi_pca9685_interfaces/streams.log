@@ -1,0 +1,50 @@
+[0.010s] Invoking command in '/home/clue/jointer_ws/build/pi_pca9685_interfaces': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/clue/jointer_ws/src/pi_pca9685_interfaces -DCMAKE_INSTALL_PREFIX=/home/clue/jointer_ws/install/pi_pca9685_interfaces
+[0.023s] -- Found ament_cmake: 1.3.9 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.156s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[0.157s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.160s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.194s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.404s] [31mCMake Error at /opt/ros/humble/share/rosidl_adapter/cmake/rosidl_adapt_interfaces.cmake:59 (message):
+[0.404s]   execute_process(/usr/bin/python3 -m rosidl_adapter --package-name
+[0.404s]   pi_pca9685_interfaces --arguments-file
+[0.404s]   /home/clue/jointer_ws/build/pi_pca9685_interfaces/rosidl_adapter__arguments__pi_pca9685_interfaces.json
+[0.404s]   --output-dir
+[0.404s]   /home/clue/jointer_ws/build/pi_pca9685_interfaces/rosidl_adapter/pi_pca9685_interfaces
+[0.405s]   --output-file
+[0.405s]   /home/clue/jointer_ws/build/pi_pca9685_interfaces/rosidl_adapter/pi_pca9685_interfaces.idls)
+[0.405s]   returned error code 1:
+[0.405s] 
+[0.405s]   Traceback (most recent call last):
+[0.405s] 
+[0.405s]     File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+[0.405s]       return _run_code(code, main_globals, None,
+[0.405s]     File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+[0.405s]       exec(code, run_globals)
+[0.406s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/__main__.py", line 19, in <module>
+[0.406s]       sys.exit(main())
+[0.406s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/main.py", line 53, in main
+[0.406s]       abs_idl_file = convert_to_idl(
+[0.406s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/__init__.py", line 29, in convert_to_idl
+[0.406s]       return convert_action_to_idl(
+[0.406s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/action/__init__.py", line 28, in convert_action_to_idl
+[0.406s]       action = parse_action_string(package_name, input_file.stem, content)
+[0.406s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/parser.py", line 902, in parse_action_string
+[0.406s]       goal_message = parse_message_string(
+[0.407s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/parser.py", line 544, in parse_message_string
+[0.407s]       msg = MessageSpecification(pkg_name, msg_name, fields, constants)
+[0.407s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/parser.py", line 388, in __init__
+[0.407s]       self.base_type = BaseType(
+[0.407s]     File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_adapter/parser.py", line 205, in __init__
+[0.407s]       raise InvalidResourceName(
+[0.407s] 
+[0.407s]   rosidl_adapter.parser.InvalidResourceName: 'pca9685_Goal' is an invalid
+[0.407s]   message name.  It should have the pattern '^[A-Z][A-Za-z0-9]*$'
+[0.407s] 
+[0.408s] Call Stack (most recent call first):
+[0.408s]   /opt/ros/humble/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:130 (rosidl_adapt_interfaces)
+[0.408s]   CMakeLists.txt:12 (rosidl_generate_interfaces)
+[0.408s] 
+[0.408s] [0m
+[0.408s] -- Configuring incomplete, errors occurred!
+[0.408s] See also "/home/clue/jointer_ws/build/pi_pca9685_interfaces/CMakeFiles/CMakeOutput.log".
+[0.412s] Invoked command in '/home/clue/jointer_ws/build/pi_pca9685_interfaces' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/clue/jointer_ws/src/pi_pca9685_interfaces -DCMAKE_INSTALL_PREFIX=/home/clue/jointer_ws/install/pi_pca9685_interfaces

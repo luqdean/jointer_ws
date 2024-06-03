@@ -1,0 +1,24 @@
+// generated from rosidl_adapter/resource/action.idl.em
+// with input from pi_pca9685_interfaces/action/PCA.action
+// generated code does not contain a copyright notice
+
+
+module pi_pca9685_interfaces {
+  module action {
+    @verbatim (language="comment", text=
+      "Goal")
+    struct PCA_Goal {
+      string pca;
+    };
+    @verbatim (language="comment", text=
+      "Result")
+    struct PCA_Result {
+      int32 value;
+    };
+    @verbatim (language="comment", text=
+      "Feedback")
+    struct PCA_Feedback {
+      int32 feedback;
+    };
+  };
+};

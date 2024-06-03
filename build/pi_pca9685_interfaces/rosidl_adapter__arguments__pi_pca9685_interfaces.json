@@ -1,0 +1,6 @@
+{
+  "package_name": "pi_pca9685_interfaces",
+  "non_idl_tuples": [
+    "/home/clue/jointer_ws/src/pi_pca9685_interfaces:action/PCA.action"
+  ]
+}
