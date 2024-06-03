@@ -83,7 +83,6 @@ class PCA9685ActionServer(Node):
         # Publish the feedback
         goal_handle.publish_feedback(feedback_msg)
 
-        # get the pin id and action type
         servo_id, servo_angle = goal_msg.split(',')   
         angle = int(servo_angle)
         self.get_logger().info(f'Setting servo {servo_id} to angle {angle}')
