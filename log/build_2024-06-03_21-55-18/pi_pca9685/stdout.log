@@ -1,0 +1,36 @@
+running egg_info
+creating ../../build/pi_pca9685/pi_pca9685.egg-info
+writing ../../build/pi_pca9685/pi_pca9685.egg-info/PKG-INFO
+writing dependency_links to ../../build/pi_pca9685/pi_pca9685.egg-info/dependency_links.txt
+writing entry points to ../../build/pi_pca9685/pi_pca9685.egg-info/entry_points.txt
+writing requirements to ../../build/pi_pca9685/pi_pca9685.egg-info/requires.txt
+writing top-level names to ../../build/pi_pca9685/pi_pca9685.egg-info/top_level.txt
+writing manifest file '../../build/pi_pca9685/pi_pca9685.egg-info/SOURCES.txt'
+reading manifest file '../../build/pi_pca9685/pi_pca9685.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file '../../build/pi_pca9685/pi_pca9685.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/clue/jointer_ws/build/pi_pca9685/build
+creating /home/clue/jointer_ws/build/pi_pca9685/build/lib
+creating /home/clue/jointer_ws/build/pi_pca9685/build/lib/pi_pca9685
+copying pi_pca9685/pi_pca9685_server.py -> /home/clue/jointer_ws/build/pi_pca9685/build/lib/pi_pca9685
+copying pi_pca9685/__init__.py -> /home/clue/jointer_ws/build/pi_pca9685/build/lib/pi_pca9685
+running install
+running install_lib
+creating /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685
+copying /home/clue/jointer_ws/build/pi_pca9685/build/lib/pi_pca9685/pi_pca9685_server.py -> /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685
+copying /home/clue/jointer_ws/build/pi_pca9685/build/lib/pi_pca9685/__init__.py -> /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685
+byte-compiling /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685/pi_pca9685_server.py to pi_pca9685_server.cpython-310.pyc
+byte-compiling /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /home/clue/jointer_ws/install/pi_pca9685/share/ament_index
+creating /home/clue/jointer_ws/install/pi_pca9685/share/ament_index/resource_index
+creating /home/clue/jointer_ws/install/pi_pca9685/share/ament_index/resource_index/packages
+copying resource/pi_pca9685 -> /home/clue/jointer_ws/install/pi_pca9685/share/ament_index/resource_index/packages
+copying package.xml -> /home/clue/jointer_ws/install/pi_pca9685/share/pi_pca9685
+running install_egg_info
+Copying ../../build/pi_pca9685/pi_pca9685.egg-info to /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685-0.0.0-py3.10.egg-info
+running install_scripts
+Installing pi_pca9685_server script to /home/clue/jointer_ws/install/pi_pca9685/lib/pi_pca9685
+writing list of installed files to '/home/clue/jointer_ws/build/pi_pca9685/install.log'
