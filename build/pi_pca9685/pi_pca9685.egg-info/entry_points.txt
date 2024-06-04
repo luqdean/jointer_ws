@@ -1,3 +1,4 @@
 [console_scripts]
+pi_pca9685_client = pi_pca9685.pi_pca9685_client:main
 pi_pca9685_server = pi_pca9685.pi_pca9685_server:main
 
