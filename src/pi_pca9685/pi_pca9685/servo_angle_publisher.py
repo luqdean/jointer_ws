@@ -16,7 +16,7 @@ class ServoAnglePublisher(Node):
 
         message1 = f'1,{servo1_angle}'  # Command for servo 1
         message2 = f'2,{servo2_angle}'  # Command for servo 2
-
+        time.sleep(5)
         self.publisher_.publish(String(data=message1))
         self.publisher_.publish(String(data=message2))
 
