@@ -22,6 +22,7 @@ setup(
         'console_scripts': [
             'pi_pca9685_server = ' + package_name + '.pi_pca9685_server:main',
             'pi_pca9685_client = ' + package_name + '.pi_pca9685_client:main',
+            'servo_angle_publisher = ' + package_name + '.servo_angle_publisher:main',
         ],
     },
 )
