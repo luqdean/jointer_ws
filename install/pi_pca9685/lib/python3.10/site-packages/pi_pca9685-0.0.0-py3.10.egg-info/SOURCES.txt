@@ -10,6 +10,7 @@ setup.py
 ../../build/pi_pca9685/pi_pca9685.egg-info/top_level.txt
 ../../build/pi_pca9685/pi_pca9685.egg-info/zip-safe
 pi_pca9685/__init__.py
+pi_pca9685/pi_pca9685_client.py
 pi_pca9685/pi_pca9685_server.py
 resource/pi_pca9685
 test/test_copyright.py

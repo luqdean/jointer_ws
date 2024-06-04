@@ -1,0 +1,23 @@
+running egg_info
+writing ../../build/pi_pca9685/pi_pca9685.egg-info/PKG-INFO
+writing dependency_links to ../../build/pi_pca9685/pi_pca9685.egg-info/dependency_links.txt
+writing entry points to ../../build/pi_pca9685/pi_pca9685.egg-info/entry_points.txt
+writing requirements to ../../build/pi_pca9685/pi_pca9685.egg-info/requires.txt
+writing top-level names to ../../build/pi_pca9685/pi_pca9685.egg-info/top_level.txt
+reading manifest file '../../build/pi_pca9685/pi_pca9685.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file '../../build/pi_pca9685/pi_pca9685.egg-info/SOURCES.txt'
+running build
+running build_py
+copying pi_pca9685/pi_pca9685_server.py -> /home/clue/jointer_ws/build/pi_pca9685/build/lib/pi_pca9685
+running install
+running install_lib
+copying /home/clue/jointer_ws/build/pi_pca9685/build/lib/pi_pca9685/pi_pca9685_server.py -> /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685
+byte-compiling /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685/pi_pca9685_server.py to pi_pca9685_server.cpython-310.pyc
+running install_data
+running install_egg_info
+removing '/home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685-0.0.0-py3.10.egg-info' (and everything under it)
+Copying ../../build/pi_pca9685/pi_pca9685.egg-info to /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685-0.0.0-py3.10.egg-info
+running install_scripts
+Installing pi_pca9685_server script to /home/clue/jointer_ws/install/pi_pca9685/lib/pi_pca9685
+writing list of installed files to '/home/clue/jointer_ws/build/pi_pca9685/install.log'

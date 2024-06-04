@@ -1,0 +1,25 @@
+[0.870s] Invoking command in '/home/clue/jointer_ws/src/pi_pca9685': PYTHONPATH=/home/clue/jointer_ws/build/pi_pca9685/prefix_override:/home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/pi_pca9685 build --build-base /home/clue/jointer_ws/build/pi_pca9685/build install --record /home/clue/jointer_ws/build/pi_pca9685/install.log --single-version-externally-managed install_data
+[1.315s] running egg_info
+[1.317s] writing ../../build/pi_pca9685/pi_pca9685.egg-info/PKG-INFO
+[1.317s] writing dependency_links to ../../build/pi_pca9685/pi_pca9685.egg-info/dependency_links.txt
+[1.317s] writing entry points to ../../build/pi_pca9685/pi_pca9685.egg-info/entry_points.txt
+[1.318s] writing requirements to ../../build/pi_pca9685/pi_pca9685.egg-info/requires.txt
+[1.318s] writing top-level names to ../../build/pi_pca9685/pi_pca9685.egg-info/top_level.txt
+[1.321s] reading manifest file '../../build/pi_pca9685/pi_pca9685.egg-info/SOURCES.txt'
+[1.324s] adding license file 'LICENSE'
+[1.326s] writing manifest file '../../build/pi_pca9685/pi_pca9685.egg-info/SOURCES.txt'
+[1.326s] running build
+[1.326s] running build_py
+[1.326s] copying pi_pca9685/pi_pca9685_server.py -> /home/clue/jointer_ws/build/pi_pca9685/build/lib/pi_pca9685
+[1.326s] running install
+[1.327s] running install_lib
+[1.329s] copying /home/clue/jointer_ws/build/pi_pca9685/build/lib/pi_pca9685/pi_pca9685_server.py -> /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685
+[1.330s] byte-compiling /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685/pi_pca9685_server.py to pi_pca9685_server.cpython-310.pyc
+[1.331s] running install_data
+[1.332s] running install_egg_info
+[1.335s] removing '/home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685-0.0.0-py3.10.egg-info' (and everything under it)
+[1.335s] Copying ../../build/pi_pca9685/pi_pca9685.egg-info to /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685-0.0.0-py3.10.egg-info
+[1.337s] running install_scripts
+[1.369s] Installing pi_pca9685_server script to /home/clue/jointer_ws/install/pi_pca9685/lib/pi_pca9685
+[1.370s] writing list of installed files to '/home/clue/jointer_ws/build/pi_pca9685/install.log'
+[1.401s] Invoked command in '/home/clue/jointer_ws/src/pi_pca9685' returned '0': PYTHONPATH=/home/clue/jointer_ws/build/pi_pca9685/prefix_override:/home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/pi_pca9685 build --build-base /home/clue/jointer_ws/build/pi_pca9685/build install --record /home/clue/jointer_ws/build/pi_pca9685/install.log --single-version-externally-managed install_data

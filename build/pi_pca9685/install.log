@@ -1,6 +1,8 @@
 /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685/pi_pca9685_server.py
+/home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685/pi_pca9685_client.py
 /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685/__init__.py
 /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685/__pycache__/pi_pca9685_server.cpython-310.pyc
+/home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685/__pycache__/pi_pca9685_client.cpython-310.pyc
 /home/clue/jointer_ws/install/pi_pca9685/lib/python3.10/site-packages/pi_pca9685/__pycache__/__init__.cpython-310.pyc
 /home/clue/jointer_ws/install/pi_pca9685/share/ament_index/resource_index/packages/pi_pca9685
 /home/clue/jointer_ws/install/pi_pca9685/share/pi_pca9685/package.xml

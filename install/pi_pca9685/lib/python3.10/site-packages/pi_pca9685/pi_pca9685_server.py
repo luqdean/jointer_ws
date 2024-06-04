@@ -20,7 +20,7 @@ class PCA9685_Servo:
 
 class PCA9685ActionServer(Node):
     def __init__(self):
-        super().__init__('PCA9685_server')
+        super().__init__('pi_pca9685_server')
               
         self._goal_handle = None
         self._goal_lock = threading.Lock()
@@ -29,7 +29,7 @@ class PCA9685ActionServer(Node):
         self._action_server = ActionServer(
             self,
             PCA,
-            'PCA9685_server',
+            'pi_pca9685_server',
             execute_callback=self.execute_callback,
             goal_callback=self.goal_callback,
             handle_accepted_callback=self.handle_accepted_callback,
@@ -83,7 +83,6 @@ class PCA9685ActionServer(Node):
         # Publish the feedback
         goal_handle.publish_feedback(feedback_msg)
 
-        # get the pin id and action type
         servo_id, servo_angle = goal_msg.split(',')   
         angle = int(servo_angle)
         self.get_logger().info(f'Setting servo {servo_id} to angle {angle}')
