@@ -2,7 +2,7 @@
 string pca
 ---
 # Result
-int32 value
+bool success
 ---
 # Feedback
-int32 feedback
+string feedback

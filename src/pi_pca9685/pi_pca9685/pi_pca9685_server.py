@@ -1,5 +1,6 @@
 import time
 import threading
+import queue
 import rclpy
 from rclpy.action import ActionServer, CancelResponse, GoalResponse
 from rclpy.callback_groups import ReentrantCallbackGroup
@@ -9,23 +10,22 @@ from pi_pca9685_interfaces.action import PCA
 from adafruit_servokit import ServoKit
 
 class PCA9685_Servo:
-    def __init__(self, servo_id, angle):
-        self.servo_id = servo_id
+    def __init__(self):
         self.kit = ServoKit(channels=16)
-        self.set_angle(angle)
         
-    def set_angle(self, angle):
-        self.kit.servo[self.servo_id].angle = angle
-        time.sleep(1)
+    def set_angle(self, servo_id, angle):
+        self.kit.servo[servo_id].angle = angle
+
 
 class PCA9685ActionServer(Node):
     def __init__(self):
         super().__init__('pi_pca9685_server')
               
-        self._goal_handle = None
-        self._goal_lock = threading.Lock()
+        self.servo_queues = {}
+        self.queue_locks = {}
+        self.servo_threads = {}
+        self.servo_controller = PCA9685_Servo()
 
-        # Node, servo_angle, action_name, execute_callback
         self._action_server = ActionServer(
             self,
             PCA,
@@ -45,51 +45,69 @@ class PCA9685ActionServer(Node):
         return GoalResponse.ACCEPT
 
     def handle_accepted_callback(self, goal_handle):
-        with self._goal_lock:
-            if self._goal_handle is not None and self._goal_handle.is_active:
-                self.get_logger().info('Aborting previous goal')
-                self._goal_handle.abort()
-            self._goal_handle = goal_handle
+        servo_commands = goal_handle.request.pca
+        for command in servo_commands:
+            servo_id, _ = command.split(',')
+            servo_id = int(servo_id)
 
-        goal_handle.execute()
+            if servo_id not in self.servo_queues:
+                self.servo_queues[servo_id] = queue.Queue()
+                self.queue_locks[servo_id] = threading.Lock()
+                self.servo_threads[servo_id] = threading.Thread(target=self._process_queue, args=(servo_id,))
+                self.servo_threads[servo_id].start()
+
+            self.servo_queues[servo_id].put(goal_handle)
 
     def cancel_callback(self, goal):
         self.get_logger().info('Received cancel request')
         return CancelResponse.ACCEPT
 
     def execute_callback(self, goal_handle):
-        """Executes the goal."""
+        pass  # Execution is handled in the _process_queue method
+
+    def _process_queue(self, servo_id):
+        while rclpy.ok():
+            goal_handle = self.servo_queues[servo_id].get()
+            with self.queue_locks[servo_id]:
+                self._execute_goal(goal_handle, servo_id)
+
+    def _execute_goal(self, goal_handle, servo_id):
         self.get_logger().info('Executing goal...')
 
-        # Populate goal message
-        goal_msg = goal_handle.request.pca
-
-        # Populate feedback message
+        servo_commands = goal_handle.request.pca
         feedback_msg = PCA.Feedback()
-        feedback_msg.feedback = 1
-
-        # Populate result message
         result = PCA.Result()
 
-        if not goal_handle.is_active:
-            self.get_logger().info('Goal aborted')
-            return PCA.Result()
+        for command in servo_commands:
+            cmd_servo_id, servo_angle = command.split(',')
+            cmd_servo_id = int(cmd_servo_id)
+            angle = int(servo_angle)
 
-        if goal_handle.is_cancel_requested:
-            goal_handle.canceled()
-            self.get_logger().info('Goal canceled')
-            return PCA.Result()
+            if cmd_servo_id != servo_id:
+                continue
 
-        # Publish the feedback
-        goal_handle.publish_feedback(feedback_msg)
+            if not goal_handle.is_active:
+                self.get_logger().info('Goal aborted')
+                result.success = False
+                goal_handle.abort()
+                return
 
-        servo_id, servo_angle = goal_msg.split(',')   
-        angle = int(servo_angle)
-        self.get_logger().info(f'Setting servo {servo_id} to angle {angle}')
-        PCA9685_Servo(int(servo_id), angle)
+            if goal_handle.is_cancel_requested:
+                goal_handle.canceled()
+                self.get_logger().info('Goal canceled')
+                result.success = False
+                return
+
+            self.get_logger().info(f'Setting servo {servo_id} to angle {angle}')
+            self.servo_controller.set_angle(servo_id, angle)
+
+            feedback_msg.feedback = f'Servo {servo_id} set to angle {angle}'
+            goal_handle.publish_feedback(feedback_msg)
+            time.sleep(1)
 
         goal_handle.succeed()
-        return result
+        result.success = True
+        self.get_logger().info('Goal succeeded')
 
 def main(args=None):
     rclpy.init(args=args)
