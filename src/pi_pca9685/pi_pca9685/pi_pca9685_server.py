@@ -62,28 +62,27 @@ class PCA9685ActionServer(Node):
         result = PCA.Result()
         self.get_logger().info(f'Received goal: {server_servo_commands}')
         
-        for command in server_servo_commands:
-            servo_id, servo_angle = command.split(',')
-            servo_id = int(servo_id)
-            angle = int(servo_angle)
+        servo_id, servo_angle = server_servo_commands.split(',')
+        servo_id = int(servo_id)
+        angle = int(servo_angle)
 
-            if not goal_handle.is_active:
-                self.get_logger().info('Goal aborted')
-                result.success = False
-                goal_handle.abort()
-                return
+        if not goal_handle.is_active:
+            self.get_logger().info('Goal aborted')
+            result.success = False
+            goal_handle.abort()
+            return
 
-            if goal_handle.is_cancel_requested:
-                goal_handle.canceled()
-                self.get_logger().info('Goal canceled')
-                result.success = False
-                return
+        if goal_handle.is_cancel_requested:
+            goal_handle.canceled()
+            self.get_logger().info('Goal canceled')
+            result.success = False
+            return
 
-            self.get_logger().info(f'Setting servo {servo_id} to angle {angle}')
-            self.servo_controller.set_angle(servo_id, angle)
+        self.get_logger().info(f'Setting servo {servo_id} to angle {angle}')
+        self.servo_controller.set_angle(servo_id, angle)
 
-            feedback_msg.feedback = f'Servo {servo_id} set to angle {angle}'
-            goal_handle.publish_feedback(feedback_msg)
+        feedback_msg.feedback = f'Servo {servo_id} set to angle {angle}'
+        goal_handle.publish_feedback(feedback_msg)
 
         goal_handle.succeed()
         result.success = True
