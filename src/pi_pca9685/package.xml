@@ -3,13 +3,24 @@
 <package format="3">
   <name>pi_pca9685</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Package to control PCA9685 servos using ROS 2 action interface</description>
   <maintainer email="you@example.com">clue</maintainer>
   <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>rosidl_default_generators</buildtool_depend>
+
+  <build_depend>rclpy</build_depend>
+  <build_depend>action_msgs</build_depend>
+  <build_depend>rosidl_default_runtime</build_depend>
+  <build_depend>ament_python</build_depend>
 
   <exec_depend>pi_gpio_interfaces</exec_depend>
   <exec_depend>rclpy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
+  <exec_depend>action_msgs</exec_depend>
+  <exec_depend>rosidl_default_runtime</exec_depend>
+  <exec_depend>adafruit-circuitpython-servokit</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
