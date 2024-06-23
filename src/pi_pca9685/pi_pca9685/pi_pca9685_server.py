@@ -40,21 +40,14 @@ class PCA9685ActionServer(Node):
         return GoalResponse.ACCEPT
 
     def handle_accepted_callback(self, goal_handle):
-        server_servo_commands = goal_handle.request.pca
         self.get_logger().info('Handle Goal Accept')
-        
-        # Directly execute the latest goal received
-        self._execute_goal(goal_handle)
+        goal_handle.execute()
 
     def cancel_callback(self, goal):
         self.get_logger().info('Received cancel request')
         return CancelResponse.ACCEPT
 
     def execute_callback(self, goal_handle):
-        # Since we are directly executing in handle_accepted_callback, this can be empty
-        pass
-
-    def _execute_goal(self, goal_handle):
         self.get_logger().info('Executing goal...')
         
         server_servo_commands = goal_handle.request.pca
@@ -66,29 +59,17 @@ class PCA9685ActionServer(Node):
         servo_id = int(servo_id)
         angle = int(servo_angle)
 
-        if not goal_handle.is_active:
-            self.get_logger().info('Goal aborted')
-            result.success = False
-            goal_handle.abort()
-            return
-
-        if goal_handle.is_cancel_requested:
-            goal_handle.canceled()
-            self.get_logger().info('Goal canceled')
-            result.success = False
-            return
-
         self.get_logger().info(f'Setting servo {servo_id} to angle {angle}')
         self.servo_controller.set_angle(servo_id, angle)
 
         feedback_msg.feedback = f'Servo {servo_id} set to angle {angle}'
         goal_handle.publish_feedback(feedback_msg)
-
-        goal_handle.succeed()
+        self.get_logger().info('Submit Feedback')
         result.success = True
-        time.sleep(2)
-
+        self.get_logger().info('Returned the Result')
+        goal_handle.succeed()
         self.get_logger().info('Goal succeeded')
+        return result
 
 def main(args=None):
     rclpy.init(args=args)
