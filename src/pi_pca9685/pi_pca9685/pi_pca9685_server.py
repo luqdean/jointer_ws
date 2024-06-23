@@ -1,4 +1,5 @@
 import rclpy
+import time
 from rclpy.action import ActionServer, CancelResponse, GoalResponse
 from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.executors import MultiThreadedExecutor
@@ -85,6 +86,8 @@ class PCA9685ActionServer(Node):
 
         goal_handle.succeed()
         result.success = True
+        time.sleep(2)
+        
         self.get_logger().info('Goal succeeded')
 
 def main(args=None):
