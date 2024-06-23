@@ -45,8 +45,8 @@ class PCA9685ActionServer(Node):
         return GoalResponse.ACCEPT
 
     def handle_accepted_callback(self, goal_handle):
-        servo_commands = goal_handle.request.pca
-        for command in servo_commands:
+        server_servo_commands = goal_handle.request.pca
+        for command in server_servo_commands:
             servo_id, _ = command.split(',')
             servo_id = int(servo_id)
 
@@ -74,11 +74,11 @@ class PCA9685ActionServer(Node):
     def _execute_goal(self, goal_handle, servo_id):
         self.get_logger().info('Executing goal...')
 
-        servo_commands = goal_handle.request.pca
+        server_servo_commands = goal_handle.request.pca
         feedback_msg = PCA.Feedback()
         result = PCA.Result()
 
-        for command in servo_commands:
+        for command in server_servo_commands:
             cmd_servo_id, servo_angle = command.split(',')
             cmd_servo_id = int(cmd_servo_id)
             angle = int(servo_angle)
