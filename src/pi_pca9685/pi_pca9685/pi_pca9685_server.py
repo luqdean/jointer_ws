@@ -60,7 +60,8 @@ class PCA9685ActionServer(Node):
         server_servo_commands = goal_handle.request.pca
         feedback_msg = PCA.Feedback()
         result = PCA.Result()
-
+        self.get_logger().info(f'Received goal: {server_servo_commands}')
+        
         for command in server_servo_commands:
             servo_id, servo_angle = command.split(',')
             servo_id = int(servo_id)
@@ -87,7 +88,7 @@ class PCA9685ActionServer(Node):
         goal_handle.succeed()
         result.success = True
         time.sleep(2)
-        
+
         self.get_logger().info('Goal succeeded')
 
 def main(args=None):
