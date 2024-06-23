@@ -3,6 +3,7 @@ from rclpy.action import ActionClient
 from rclpy.node import Node
 from std_msgs.msg import String
 from pi_pca9685_interfaces.action import PCA
+import queue
 
 class PCA9685ActionClient(Node):
 
@@ -14,11 +15,18 @@ class PCA9685ActionClient(Node):
             'servo_commands',
             self.listener_callback,
             10)
+        self.command_queue = queue.Queue()
 
     def listener_callback(self, msg):
         self.get_logger().info(f'Received: {msg.data}')
-        servo_id, angle = msg.data.split(',')
-        self.send_goal(int(servo_id), int(angle))
+        self.command_queue.put(msg.data)
+        self.process_command_queue()
+
+    def process_command_queue(self):
+        while not self.command_queue.empty():
+            command = self.command_queue.get()
+            servo_id, angle = command.split(',')
+            self.send_goal(int(servo_id), int(angle))
 
     def send_goal(self, servo_id, angle):
         goal_msg = PCA.Goal()
