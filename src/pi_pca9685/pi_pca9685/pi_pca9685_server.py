@@ -46,10 +46,11 @@ class PCA9685ActionServer(Node):
 
     def handle_accepted_callback(self, goal_handle):
         server_servo_commands = goal_handle.request.pca
+        self.get_logger().info('Handle Goal Accept')
         for command in server_servo_commands:
             servo_id, _ = command.split(',')
             servo_id = int(servo_id)
-
+        
             if servo_id not in self.servo_queues:
                 self.servo_queues[servo_id] = queue.Queue()
                 self.queue_locks[servo_id] = threading.Lock()
