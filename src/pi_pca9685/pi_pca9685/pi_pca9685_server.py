@@ -5,36 +5,36 @@ from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.node import Node
 from pi_pca9685_interfaces.action import PCA
-# from adafruit_servokit import ServoKit
-
-# class PCA9685_Servo:
-#     def __init__(self):
-#         # self.kit = ServoKit(channels=16)
-#         self.servo_channels = range(1, 9)  # Servo channels (adjust as per your hardware)
-        
-#     def set_angles(self, angle_one, angle_two, angle_three, angle_four, angle_five, angle_six, angle_seven, angle_eight):
-#         if len(self.servo_channels) != 8:
-#             raise ValueError("The number of servo channels should be 8")
-#         self.kit.servo[0].angle = angle_one
-#         self.kit.servo[1].angle = angle_two
-#         self.kit.servo[2].angle = angle_three
-#         self.kit.servo[3].angle = angle_four
-#         self.kit.servo[4].angle = angle_five
-#         self.kit.servo[5].angle = angle_six
-#         self.kit.servo[6].angle = angle_seven
-#         self.kit.servo[7].angle = angle_eight
+from adafruit_servokit import ServoKit
 
 class PCA9685_Servo:
     def __init__(self):
-        # Initialize servo channels (adjust as per your hardware)
-        self.servo_channels = range(1, 9)
-
+        self.kit = ServoKit(channels=16)
+        self.servo_channels = range(1, 9)  # Servo channels (adjust as per your hardware)
+        
     def set_angles(self, angle_one, angle_two, angle_three, angle_four, angle_five, angle_six, angle_seven, angle_eight):
         if len(self.servo_channels) != 8:
             raise ValueError("The number of servo channels should be 8")
+        self.kit.servo[0].angle = angle_one
+        self.kit.servo[1].angle = angle_two
+        self.kit.servo[2].angle = angle_three
+        self.kit.servo[3].angle = angle_four
+        self.kit.servo[4].angle = angle_five
+        self.kit.servo[5].angle = angle_six
+        self.kit.servo[6].angle = angle_seven
+        self.kit.servo[7].angle = angle_eight
+
+# class PCA9685_Servo:
+#     def __init__(self):
+#         # Initialize servo channels (adjust as per your hardware)
+#         self.servo_channels = range(1, 9)
+
+#     def set_angles(self, angle_one, angle_two, angle_three, angle_four, angle_five, angle_six, angle_seven, angle_eight):
+#         if len(self.servo_channels) != 8:
+#             raise ValueError("The number of servo channels should be 8")
         
-        # Simulate setting angles (for testing purposes)
-        print(f"Setting angles: {angle_one}, {angle_two}, {angle_three}, {angle_four}, {angle_five}, {angle_six}, {angle_seven}, {angle_eight}")
+#         # Simulate setting angles (for testing purposes)
+#         print(f"Setting angles: {angle_one}, {angle_two}, {angle_three}, {angle_four}, {angle_five}, {angle_six}, {angle_seven}, {angle_eight}")
 
 class PCA9685ActionServer(Node):
     def __init__(self):
