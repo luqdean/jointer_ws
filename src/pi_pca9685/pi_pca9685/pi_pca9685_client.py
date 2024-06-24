@@ -20,20 +20,22 @@ class PCA9685ActionClient(Node):
     def listener_callback(self, msg):
         self.get_logger().info(f'Received: {msg.data}')
         self.command_queue.put(msg.data)
-        self.process_command_queue()
+        self.send_batch_goal()
 
-    def process_command_queue(self):
-        while not self.command_queue.empty():
-            command = self.command_queue.get()
-            servo_id, angle = command.split(',')
-            self.send_goal(int(servo_id), int(angle))
+    def send_batch_goal(self):
+        if self.command_queue.empty():
+            return
 
-    def send_goal(self, servo_id, angle):
+        batch_commands = ";".join(list(self.command_queue.queue))
+        self.command_queue.queue.clear()  # Clear the queue after forming batch
+        self.send_goal(batch_commands)
+
+    def send_goal(self, batch_commands):
         goal_msg = PCA.Goal()
-        goal_msg.pca = f'{servo_id},{angle}'
+        goal_msg.pca = batch_commands
 
         self._action_client.wait_for_server()
-        self.get_logger().info('Sending goal request...')
+        self.get_logger().info('Sending batch goal request...')
 
         self._send_goal_future = self._action_client.send_goal_async(
             goal_msg,
@@ -65,7 +67,7 @@ def main(args=None):
 
     rclpy.spin(action_client)
 
-    action_client.destroy()
+    action_client.destroy_node()
     rclpy.shutdown()
 
 if __name__ == '__main__':

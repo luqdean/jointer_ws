@@ -2,26 +2,26 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 import random
-import time
 
 class ServoAnglePublisher(Node):
     def __init__(self):
         super().__init__('servo_angle_publisher')
         self.publisher_ = self.create_publisher(String, 'servo_commands', 10)
-        self.timer = self.create_timer(1.0, self.timer_callback)  # Publish every second
+        self.timer_ = self.create_timer(1.0, self.publish_commands)
 
-    def timer_callback(self):
-        servo1_angle = random.randint(0, 180)  # Random angle for servo 1 between 0 and 180
-        # servo2_angle = random.randint(0, 180)  # Random angle for servo 2 between 0 and 180
+    def publish_commands(self):
+        servo_commands = self.generate_random_commands()
+        msg = String()
+        msg.data = ';'.join(servo_commands)
+        self.publisher_.publish(msg)
+        self.get_logger().info(f'Publishing servo commands: {msg.data}')
 
-        message1 = f'1,{servo1_angle}'  # Command for servo 1
-        # message2 = f'2,{servo2_angle}'  # Command for servo 2
-        time.sleep(5)
-        self.publisher_.publish(String(data=message1))
-        # self.publisher_.publish(String(data=message2))
-
-        self.get_logger().info(f'Published: {message1}')
-        # self.get_logger().info(f'Published: {message2}')
+    def generate_random_commands(self):
+        commands = []
+        for i in range(8):  # Generate 8 random angles
+            angle = random.randint(0, 180)  # Random angle between 0 and 180 degrees
+            commands.append(f'{angle}')
+        return commands
 
 def main(args=None):
     rclpy.init(args=args)
