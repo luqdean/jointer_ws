@@ -12,29 +12,29 @@ class PCA9685_Servo:
         self.kit = ServoKit(channels=16)
         self.servo_channels = range(1, 9)  # Servo channels (adjust as per your hardware)
         
-    def set_angles(self, angle_one, angle_two, angle_three, angle_four, angle_five, angle_six, angle_seven, angle_eight):
+    def set_angles(self, angle_one, angle_one_one, angle_two, angle_two_two, angle_three, angle_three_three, angle_four, angle_four_four):
         if len(self.servo_channels) != 8:
             raise ValueError("The number of servo channels should be 8")
         self.kit.servo[0].angle = angle_one
-        self.kit.servo[1].angle = angle_two
-        self.kit.servo[2].angle = angle_three
-        self.kit.servo[3].angle = angle_four
-        self.kit.servo[4].angle = angle_five
-        self.kit.servo[5].angle = angle_six
-        self.kit.servo[6].angle = angle_seven
-        self.kit.servo[7].angle = angle_eight
+        self.kit.servo[1].angle = angle_one_one
+        self.kit.servo[2].angle = angle_two
+        self.kit.servo[3].angle = angle_two_two
+        self.kit.servo[4].angle = angle_three
+        self.kit.servo[5].angle = angle_three_three
+        self.kit.servo[6].angle = angle_four
+        self.kit.servo[7].angle = angle_four_four
 
 # class PCA9685_Servo:
 #     def __init__(self):
 #         # Initialize servo channels (adjust as per your hardware)
 #         self.servo_channels = range(1, 9)
 
-#     def set_angles(self, angle_one, angle_two, angle_three, angle_four, angle_five, angle_six, angle_seven, angle_eight):
+#     def set_angles(self, angle_one, angle_one_one, angle_two, angle_two_two, angle_three, angle_three_three, angle_four, angle_four_four):
 #         if len(self.servo_channels) != 8:
 #             raise ValueError("The number of servo channels should be 8")
         
 #         # Simulate setting angles (for testing purposes)
-#         print(f"Setting angles: {angle_one}, {angle_two}, {angle_three}, {angle_four}, {angle_five}, {angle_six}, {angle_seven}, {angle_eight}")
+#         print(f"Setting angles: {angle_one}, {angle_one_one}, {angle_two}, {angle_two_two}, {angle_three}, {angle_three_three}, {angle_four}, {angle_four_four}")
 
 class PCA9685ActionServer(Node):
     def __init__(self):
@@ -94,19 +94,19 @@ class PCA9685ActionServer(Node):
         
         try:
             angle_one = int(servo_commands[0]) if servo_commands[0] else 0
-            angle_two = int(servo_commands[1]) if servo_commands[1] else 0
-            angle_three = int(servo_commands[2]) if servo_commands[2] else 0
-            angle_four = int(servo_commands[3]) if servo_commands[3] else 0
-            angle_five = int(servo_commands[4]) if servo_commands[4] else 0
-            angle_six = int(servo_commands[5]) if servo_commands[5] else 0
-            angle_seven = int(servo_commands[6]) if servo_commands[6] else 0
-            angle_eight = int(servo_commands[7]) if servo_commands[7] else 0
+            angle_one_one = int(servo_commands[1]) if servo_commands[1] else 0
+            angle_two = int(servo_commands[2]) if servo_commands[2] else 0
+            angle_two_two = int(servo_commands[3]) if servo_commands[3] else 0
+            angle_three = int(servo_commands[4]) if servo_commands[4] else 0
+            angle_three_three = int(servo_commands[5]) if servo_commands[5] else 0
+            angle_four = int(servo_commands[6]) if servo_commands[6] else 0
+            angle_four_four = int(servo_commands[7]) if servo_commands[7] else 0
 
-            self.servo_controller.set_angles(angle_one, angle_two, angle_three, angle_four, angle_five, angle_six, angle_seven, angle_eight)
+            self.servo_controller.set_angles(angle_one, angle_one_one, angle_two, angle_two_two, angle_three, angle_three_three, angle_four, angle_four_four)
 
-            self.get_logger().info(f'Set angles: {angle_one}, {angle_two}, {angle_three}, {angle_four}, {angle_five}, {angle_six}, {angle_seven}, {angle_eight}')
+            self.get_logger().info(f'Set angles: {angle_one}, {angle_one_one}, {angle_two}, {angle_two_two}, {angle_three}, {angle_three_three}, {angle_four}, {angle_four_four}')
 
-            feedback_msg.feedback = f'Set angles: {angle_one}, {angle_two}, {angle_three}, {angle_four}, {angle_five}, {angle_six}, {angle_seven}, {angle_eight}'
+            feedback_msg.feedback = f'Set angles: {angle_one}, {angle_one_one}, {angle_two}, {angle_two_two}, {angle_three}, {angle_three_three}, {angle_four}, {angle_four_four}'
             goal_handle.publish_feedback(feedback_msg)
 
             result.success = True
