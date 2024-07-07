@@ -9,28 +9,28 @@ class KeyboardPublisher(Node):
         super().__init__('keyboard_publisher')
         self.publisher_ = self.create_publisher(String, 'servo_commands', 10)
         # Initialize angles as specified
-        self.angles = [90, 150, 90, 30, 90, 150, 90, 30]
+        self.angles = [122, 150, 57, 30, 122, 150, 57, 30]
         self.angle_step = 10  # Step to decrease angles
         self.lift_angle_PIN15 = 110
         self.default_angle_PIN15 = 150
 
-        self.forward_angle_PIN0 = 70
-        self.default_angle_PIN0 = 90
-        self.back_angle_PIN0 = 110
+        self.forward_angle_PIN0 = 150
+        self.default_angle_PIN0 = 57
+        self.back_angle_PIN0 = 70
 
         self.forward_angle_PIN4 = 110
-        self.default_angle_PIN4 = 90
+        self.default_angle_PIN4 = 57
         self.back_angle_PIN4 = 70
 
         self.lift_angle_PIN37 = 70
         self.default_angle_PIN37 = 30
 
         self.forward_angle_PIN2 = 70
-        self.default_angle_PIN2 = 90
+        self.default_angle_PIN2 = 57
         self.back_angle_PIN2 = 110
 
         self.forward_angle_PIN6 = 110
-        self.default_angle_PIN6 = 90
+        self.default_angle_PIN6 = 57
         self.back_angle_PIN6 = 70
 
     def publish_angles(self):
@@ -44,11 +44,9 @@ class KeyboardPublisher(Node):
             if self.angles[1] > self.lift_angle_PIN15:
                 self.angles[1] = self.angles[1] - self.angle_step
                 self.publish_angles()
-                time.sleep(1)
             elif self.angles[0] > self.forward_angle_PIN0:
                 self.angles[0] = self.angles[0] - self.angle_step
                 self.publish_angles()
-                time.sleep(1)
             else:
                 self.get_logger().info("Lift Leg 1 and Move the Leg 1")
                 break
@@ -57,7 +55,6 @@ class KeyboardPublisher(Node):
             if self.angles[1] < self.default_angle_PIN15:
                 self.angles[1] = self.angles[1] + self.angle_step
                 self.publish_angles()
-                time.sleep(1)
             else:
                 self.get_logger().info("Leg 1 Touch the ground")
                 break
@@ -66,11 +63,9 @@ class KeyboardPublisher(Node):
             if self.angles[5] > self.lift_angle_PIN15:
                 self.angles[5] = self.angles[5] - self.angle_step
                 self.publish_angles()
-                time.sleep(1)
             elif self.angles[4] < self.forward_angle_PIN4:
                 self.angles[4] = self.angles[4] + self.angle_step
                 self.publish_angles()
-                time.sleep(1)
             else:
                 self.get_logger().info("Lift Leg 3 and Move the Leg 3")
                 break
@@ -79,7 +74,6 @@ class KeyboardPublisher(Node):
             if self.angles[5] < self.default_angle_PIN15:
                 self.angles[5] = self.angles[5] + self.angle_step
                 self.publish_angles()
-                time.sleep(1)
             else:
                 self.get_logger().info("Leg 3 Touch the ground")
                 break
@@ -89,22 +83,18 @@ class KeyboardPublisher(Node):
             if  self.angles[0] < self.default_angle_PIN0:
                 self.angles[0] = self.angles[0] + self.angle_step
                 self.publish_angles()
-                time.sleep(1)
 
             elif self.angles[4] > self.default_angle_PIN4:
                 self.angles[4] = self.angles[4] - self.angle_step
                 self.publish_angles()
-                time.sleep(1)
 
             elif self.angles[2] < self.back_angle_PIN2:
                 self.angles[2] = self.angles[2] + self.angle_step
                 self.publish_angles()
-                time.sleep(1)
 
             elif self.angles[6] > self.back_angle_PIN6:
                 self.angles[6] = self.angles[6] - self.angle_step
                 self.publish_angles()
-                time.sleep(1)
 
             else:
                 self.get_logger().info("Move Leg 0 and Move the Leg 2 Move Leg 4 and Move the Leg 6")
