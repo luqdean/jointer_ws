@@ -14,13 +14,13 @@ class KeyboardPublisher(Node):
         self.lift_angle_PIN15 = 125
         self.default_angle_PIN15 = 130
 
-        self.forward_angle_PIN0 = 170
+        self.forward_angle_PIN0 = 140
         self.default_angle_PIN0 = 120
-        self.back_angle_PIN0 = 70
+        self.back_angle_PIN0 = 80
 
-        self.forward_angle_PIN4 = 70
+        self.forward_angle_PIN4 = 80
         self.default_angle_PIN4 = 120
-        self.back_angle_PIN4 = 170
+        self.back_angle_PIN4 = 140
 
         self.lift_angle_PIN37 = 55
         self.default_angle_PIN37 = 50
@@ -112,8 +112,6 @@ class KeyboardPublisher(Node):
             if self.angles[7] != self.lift_angle_PIN37 and self.angles[6] != self.forward_angle_PIN6:
                 self.angles[7] = self.lift_angle_PIN37
                 self.angles[6] = self.forward_angle_PIN6
-                self.angles[0] = self.back_angle_PIN0
-                self.angles[4] = self.back_angle_PIN4
                 self.publish_angles()
                 time.sleep(2)
             else:
@@ -123,10 +121,16 @@ class KeyboardPublisher(Node):
         while not (self.angles[7] == self.default_angle_PIN37 ):
             if self.angles[7] != self.default_angle_PIN37:
                 self.angles[7] = self.default_angle_PIN37
+                self.angles[6] = self.default_angle_PIN6
+                self.angles[0] = self.default_angle_PIN0
+                self.angles[0] = self.back_angle_PIN0
+                self.angles[4] = self.back_angle_PIN4
                 self.publish_angles()
                 time.sleep(2)
             else:
                 self.get_logger().info("Leg 4 Touch the ground")
+                self.angles[2] = self.default_angle_PIN2
+                self.angles[4] = self.default_angle_PIN4
                 break
 
     def update_angles(self):
