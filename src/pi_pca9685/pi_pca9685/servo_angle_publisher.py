@@ -9,75 +9,107 @@ class KeyboardPublisher(Node):
         super().__init__('keyboard_publisher')
         self.publisher_ = self.create_publisher(String, 'servo_commands', 10)
         # Initialize angles as specified
-        self.angles = [90, 160, 90, 160, 90, 160, 90, 160]
+        self.angles = [90, 150, 90, 30, 90, 150, 90, 30]
         self.angle_step = 10  # Step to decrease angles
-        self.min_angle_x = 100  # Minimum angle limit
-        self.min_angle_y = 60
-        self.default_angle_x = 160
-        self.default_angle_y = 90
-        self.max_angle_y = 120
+        self.lift_angle_PIN15 = 110
+        self.default_angle_PIN15 = 150
+
+        self.forward_angle_PIN0 = 70
+        self.default_angle_PIN0 = 90
+        self.back_angle_PIN0 = 110
+
+        self.forward_angle_PIN4 = 110
+        self.default_angle_PIN4 = 90
+        self.back_angle_PIN4 = 70
+
+        self.lift_angle_PIN37 = 70
+        self.default_angle_PIN37 = 30
+
+        self.forward_angle_PIN2 = 70
+        self.default_angle_PIN2 = 90
+        self.back_angle_PIN2 = 110
+
+        self.forward_angle_PIN6 = 110
+        self.default_angle_PIN6 = 90
+        self.back_angle_PIN6 = 70
+
     def publish_angles(self):
         msg = String()
         msg.data = ';'.join(map(str, self.angles))
         self.publisher_.publish(msg)
         self.get_logger().info(f'Publishing servo angles: {msg.data}')
     def decrease_angles(self):
-        while not (self.angles[1] == self.min_angle_x and self.angles[7] == self.min_angle_x 
-                   and self.angles[0] == self.min_angle_y and self.angles[6] == self.min_angle_y 
-                   and self.angles[2] == self.max_angle_y and self.angles[4] == self.max_angle_y):
-            if self.angles[1] > self.min_angle_x and self.angles[7] > self.min_angle_x:
+        self.publish_angles()
+        while not (self.angles[1] == self.lift_angle_PIN15 and self.angles[0] == self.forward_angle_PIN0 ):
+            if self.angles[1] > self.lift_angle_PIN15:
                 self.angles[1] = self.angles[1] - self.angle_step
-                self.angles[7] = self.angles[7] - self.angle_step
                 self.publish_angles()
                 time.sleep(1)
-            elif self.angles[0] > self.min_angle_y and self.angles[6] > self.min_angle_y and self.angles[0] < self.max_angle_y and self.angles[6] < self.max_angle_y:
+            elif self.angles[0] > self.forward_angle_PIN0:
                 self.angles[0] = self.angles[0] - self.angle_step
-                self.angles[6] = self.angles[6] - self.angle_step
-                self.angles[2] = self.angles[2] + self.angle_step
+                self.publish_angles()
+                time.sleep(1)
+            else:
+                self.get_logger().info("Lift Leg 1 and Move the Leg 1")
+                break
+
+        while not (self.angles[1] == self.default_angle_PIN15 ):
+            if self.angles[1] < self.default_angle_PIN15:
+                self.angles[1] = self.angles[1] + self.angle_step
+                self.publish_angles()
+                time.sleep(1)
+            else:
+                self.get_logger().info("Leg 1 Touch the ground")
+                break
+
+        while not (self.angles[5] == self.lift_angle_PIN15 and self.angles[4] == self.forward_angle_PIN4 ):
+            if self.angles[5] > self.lift_angle_PIN15:
+                self.angles[5] = self.angles[5] - self.angle_step
+                self.publish_angles()
+                time.sleep(1)
+            elif self.angles[4] < self.forward_angle_PIN4:
                 self.angles[4] = self.angles[4] + self.angle_step
                 self.publish_angles()
                 time.sleep(1)
             else:
-                self.get_logger().info("First Angles reached for all servos.")
+                self.get_logger().info("Lift Leg 3 and Move the Leg 3")
                 break
 
-        while not (self.angles[1] == self.default_angle_x and self.angles[7] == self.default_angle_x ):    
-            if self.angles[1] < self.default_angle_x and self.angles[7] < self.default_angle_x:
-                self.angles[1] = self.angles[1] + self.angle_step
-                self.angles[7] = self.angles[7] + self.angle_step
+        while not (self.angles[5] == self.default_angle_PIN15 ):
+            if self.angles[5] < self.default_angle_PIN15:
+                self.angles[5] = self.angles[5] + self.angle_step
                 self.publish_angles()
                 time.sleep(1)
             else:
-                self.get_logger().info("Angles reached max value.")
+                self.get_logger().info("Leg 3 Touch the ground")
                 break
 
-        while not (self.angles[3] == self.min_angle_x and self.angles[5] == self.min_angle_x 
-                   and self.angles[2] == self.default_angle_y and self.angles[4] == self.default_angle_y
-                   and self.angles[0] == self.default_angle_y and self.angles[6] == self.default_angle_y):      
-                if self.angles[3] > self.min_angle_x and self.angles[5] > self.min_angle_x:
-                    self.angles[3] = self.angles[3] - self.angle_step
-                    self.angles[5] = self.angles[5] - self.angle_step
-                    self.publish_angles()
-                    time.sleep(1)
-                elif self.angles[2] > self.default_angle_y and self.angles[4] > self.default_angle_y: 
-                    self.angles[2] = self.angles[2] - self.angle_step
-                    self.angles[4] = self.angles[4] - self.angle_step
-                    self.angles[0] = self.angles[0] + self.angle_step
-                    self.angles[6] = self.angles[6] + self.angle_step
-                    self.publish_angles()
-                    time.sleep(1)
-                else:
-                    self.get_logger().info("First Angles reached for all servos.3")
-                    break
-        while not (self.angles[3] == self.default_angle_x and self.angles[5] == self.default_angle_x ):
-                if self.angles[3] < self.default_angle_x and self.angles[5] < self.default_angle_x:
-                    self.angles[3] = self.angles[3] + self.angle_step
-                    self.angles[5] = self.angles[5] + self.angle_step  
-                    self.publish_angles()
-                    time.sleep(1)
-                else:
-                    self.get_logger().info("Second Angles reached for all servos.4")
-                    break
+        while not (self.angles[0] == self.forward_angle_PIN0 and self.angles[4] == self.forward_angle_PIN4
+                   and self.angles[2] == self.back_angle_PIN2 and self.angles[6] == self.back_angle_PIN6 ):
+            if  self.angles[0] < self.default_angle_PIN0:
+                self.angles[0] = self.angles[0] + self.angle_step
+                self.publish_angles()
+                time.sleep(1)
+
+            elif self.angles[4] > self.default_angle_PIN4:
+                self.angles[4] = self.angles[4] - self.angle_step
+                self.publish_angles()
+                time.sleep(1)
+
+            elif self.angles[2] < self.back_angle_PIN2:
+                self.angles[2] = self.angles[2] + self.angle_step
+                self.publish_angles()
+                time.sleep(1)
+
+            elif self.angles[6] > self.back_angle_PIN6:
+                self.angles[6] = self.angles[6] - self.angle_step
+                self.publish_angles()
+                time.sleep(1)
+
+            else:
+                self.get_logger().info("Move Leg 0 and Move the Leg 2 Move Leg 4 and Move the Leg 6")
+                break
+
 
     def update_angles(self):
         self.decrease_angles()
