@@ -9,10 +9,10 @@ class KeyboardPublisher(Node):
         super().__init__('keyboard_publisher')
         self.publisher_ = self.create_publisher(String, 'servo_commands', 10)
         # Initialize angles as specified
-        self.angles = [120, 150, 60, 30, 120, 150, 60, 30]
+        self.angles = [120, 130, 60, 50, 120, 130, 60, 50]
         # self.angle_step = 20  # Step to decrease angles
-        self.lift_angle_PIN15 = 110
-        self.default_angle_PIN15 = 150
+        self.lift_angle_PIN15 = 160
+        self.default_angle_PIN15 = 130
 
         self.forward_angle_PIN0 = 170
         self.default_angle_PIN0 = 120
@@ -22,8 +22,8 @@ class KeyboardPublisher(Node):
         self.default_angle_PIN4 = 120
         self.back_angle_PIN4 = 170
 
-        self.lift_angle_PIN37 = 70
-        self.default_angle_PIN37 = 30
+        self.lift_angle_PIN37 = 20
+        self.default_angle_PIN37 = 50
 
         self.forward_angle_PIN2 = 110
         self.default_angle_PIN2 = 60
