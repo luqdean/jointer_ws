@@ -11,7 +11,7 @@ class KeyboardPublisher(Node):
         # Initialize angles as specified
         self.angles = [120, 130, 60, 50, 120, 130, 60, 50]
         # self.angle_step = 20  # Step to decrease angles
-        self.lift_angle_PIN15 = 160
+        self.lift_angle_PIN15 = 100
         self.default_angle_PIN15 = 130
 
         self.forward_angle_PIN0 = 170
