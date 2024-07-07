@@ -16,11 +16,11 @@ class KeyboardPublisher(Node):
 
         self.forward_angle_PIN0 = 140
         self.default_angle_PIN0 = 120
-        self.back_angle_PIN0 = 80
+        self.back_angle_PIN0 = 100
 
         self.forward_angle_PIN4 = 80
         self.default_angle_PIN4 = 120
-        self.back_angle_PIN4 = 140
+        self.back_angle_PIN4 = 100
 
         self.lift_angle_PIN37 = 55
         self.default_angle_PIN37 = 50
