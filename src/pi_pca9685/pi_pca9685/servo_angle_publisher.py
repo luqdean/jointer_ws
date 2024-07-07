@@ -84,7 +84,7 @@ class KeyboardPublisher(Node):
                 self.get_logger().info("Leg 3 Touch the ground")
                 break
 
-        while not (self.angles[0] == self.forward_angle_PIN0 and self.angles[4] == self.forward_angle_PIN4
+        while not (self.angles[0] == self.default_angle_PIN0 and self.angles[4] == self.default_angle_PIN4
                    and self.angles[2] == self.back_angle_PIN2 and self.angles[6] == self.back_angle_PIN6 ):
             if  self.angles[0] < self.default_angle_PIN0:
                 self.angles[0] = self.angles[0] + self.angle_step
