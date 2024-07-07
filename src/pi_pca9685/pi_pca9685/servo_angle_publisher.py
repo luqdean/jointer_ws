@@ -122,14 +122,14 @@ class KeyboardPublisher(Node):
             if self.angles[7] != self.default_angle_PIN37:
                 self.angles[7] = self.default_angle_PIN37
                 self.angles[6] = self.default_angle_PIN6
-                self.angles[0] = self.default_angle_PIN0
+                self.angles[2] = self.default_angle_PIN2
                 self.angles[0] = self.back_angle_PIN0
                 self.angles[4] = self.back_angle_PIN4
                 self.publish_angles()
                 time.sleep(2)
             else:
                 self.get_logger().info("Leg 4 Touch the ground")
-                self.angles[2] = self.default_angle_PIN2
+                self.angles[0] = self.default_angle_PIN2
                 self.angles[4] = self.default_angle_PIN4
                 break
 
