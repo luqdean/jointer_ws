@@ -45,7 +45,7 @@ class KeyboardPublisher(Node):
                 self.angles[0] = self.forward_angle_PIN0
                 self.angles[1] = self.lift_angle_PIN15
                 self.publish_angles()
-                time.sleep(0.2)
+                time.sleep(2)
             else:
                 self.get_logger().info("Lift Leg 1 and Move the Leg 1")
                 break
@@ -54,7 +54,7 @@ class KeyboardPublisher(Node):
             if self.angles[1] != self.default_angle_PIN15:
                 self.angles[1] = self.default_angle_PIN15
                 self.publish_angles()
-                time.sleep(0.2)
+                time.sleep(2)
             else:
                 self.get_logger().info("Leg 1 Touch the ground")
                 break
@@ -64,7 +64,7 @@ class KeyboardPublisher(Node):
                 self.angles[5] = self.lift_angle_PIN15
                 self.angles[4] = self.forward_angle_PIN4
                 self.publish_angles()
-                time.sleep(0.1)
+                time.sleep(1)
             else:
                 self.get_logger().info("Lift Leg 3 and Move the Leg 3")
                 break
@@ -73,7 +73,7 @@ class KeyboardPublisher(Node):
             if self.angles[5] != self.default_angle_PIN15:
                 self.angles[5] = self.default_angle_PIN15
                 self.publish_angles()
-                time.sleep(0.2)
+                time.sleep(2)
             else:
                 self.get_logger().info("Leg 3 Touch the ground")
                 break
@@ -94,7 +94,7 @@ class KeyboardPublisher(Node):
                 self.angles[2] = self.forward_angle_PIN2
                 self.angles[3] = self.lift_angle_PIN37
                 self.publish_angles()
-                time.sleep(0.2)
+                time.sleep(2)
             else:
                 self.get_logger().info("Lift Leg 2 and Move the Leg 2")
                 break
@@ -103,7 +103,7 @@ class KeyboardPublisher(Node):
             if self.angles[3] != self.default_angle_PIN37:
                 self.angles[3] = self.default_angle_PIN37
                 self.publish_angles()
-                time.sleep(0.2)
+                time.sleep(2)
             else:
                 self.get_logger().info("Leg 2 Touch the ground")
                 break
@@ -114,9 +114,8 @@ class KeyboardPublisher(Node):
                 self.angles[6] = self.forward_angle_PIN6
                 self.angles[0] = self.back_angle_PIN0
                 self.angles[4] = self.back_angle_PIN4
-
                 self.publish_angles()
-                time.sleep(0.2)
+                time.sleep(2)
             else:
                 self.get_logger().info("Lift Leg 4 and Move the Leg 4")
                 break      
@@ -125,7 +124,7 @@ class KeyboardPublisher(Node):
             if self.angles[7] != self.default_angle_PIN37:
                 self.angles[7] = self.default_angle_PIN37
                 self.publish_angles()
-                time.sleep(0.2)
+                time.sleep(2)
             else:
                 self.get_logger().info("Leg 4 Touch the ground")
                 break
