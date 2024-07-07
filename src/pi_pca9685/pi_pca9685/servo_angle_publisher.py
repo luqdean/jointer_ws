@@ -22,7 +22,7 @@ class KeyboardPublisher(Node):
         self.default_angle_PIN4 = 120
         self.back_angle_PIN4 = 170
 
-        self.lift_angle_PIN37 = 20
+        self.lift_angle_PIN37 = 80
         self.default_angle_PIN37 = 50
 
         self.forward_angle_PIN2 = 110
@@ -41,14 +41,11 @@ class KeyboardPublisher(Node):
     def decrease_angles(self):
         self.publish_angles()
         while not (self.angles[1] == self.lift_angle_PIN15 and self.angles[0] == self.forward_angle_PIN0 ):
-            if self.angles[1] != self.lift_angle_PIN15:
+            if self.angles[1] != self.lift_angle_PIN15 and self.angles[0] != self.forward_angle_PIN0:
+                self.angles[0] = self.forward_angle_PIN0
                 self.angles[1] = self.lift_angle_PIN15
                 self.publish_angles()
-                time.sleep(1)
-            elif self.angles[0] != self.forward_angle_PIN0:
-                self.angles[0] = self.forward_angle_PIN0
-                self.publish_angles()
-                time.sleep(1)
+                time.sleep(0.2)
             else:
                 self.get_logger().info("Lift Leg 1 and Move the Leg 1")
                 break
@@ -63,14 +60,11 @@ class KeyboardPublisher(Node):
                 break
 
         while not (self.angles[5] == self.lift_angle_PIN15 and self.angles[4] == self.forward_angle_PIN4 ):
-            if self.angles[5] != self.lift_angle_PIN15:
+            if self.angles[5] != self.lift_angle_PIN15 and self.angles[4] != self.forward_angle_PIN4:
                 self.angles[5] = self.lift_angle_PIN15
-                self.publish_angles()
-                time.sleep(1)
-            elif self.angles[4] != self.forward_angle_PIN4:
                 self.angles[4] = self.forward_angle_PIN4
                 self.publish_angles()
-                time.sleep(1)
+                time.sleep(0.2)
             else:
                 self.get_logger().info("Lift Leg 3 and Move the Leg 3")
                 break
@@ -94,7 +88,44 @@ class KeyboardPublisher(Node):
                 time.sleep(1)
                 self.get_logger().info("Move Leg 0 and Move the Leg 2 Move Leg 4 and Move the Leg 6")
                 break
+        
+        while not (self.angles[3] == self.lift_angle_PIN37 and self.angles[2] == self.default_angle_PIN2 ):
+            if self.angles[3] != self.lift_angle_PIN37 and self.angles[2] != self.default_angle_PIN2:
+                self.angles[2] = self.default_angle_PIN2
+                self.angles[3] = self.lift_angle_PIN37
+                self.publish_angles()
+                time.sleep(0.2)
+            else:
+                self.get_logger().info("Lift Leg 2 and Move the Leg 2")
+                break
 
+        while not (self.angles[3] == self.default_angle_PIN37 ):
+            if self.angles[3] != self.default_angle_PIN37:
+                self.angles[3] = self.default_angle_PIN37
+                self.publish_angles()
+                time.sleep(1)
+            else:
+                self.get_logger().info("Leg 2 Touch the ground")
+                break
+
+        while not (self.angles[7] == self.lift_angle_PIN37 and self.angles[6] == self.default_angle_PIN6 ):
+            if self.angles[7] != self.lift_angle_PIN37 and self.angles[6] != self.default_angle_PIN6:
+                self.angles[7] = self.lift_angle_PIN37
+                self.angles[6] = self.default_angle_PIN6
+                self.publish_angles()
+                time.sleep(0.2)
+            else:
+                self.get_logger().info("Lift Leg 4 and Move the Leg 4")
+                break      
+
+        while not (self.angles[7] == self.default_angle_PIN37 ):
+            if self.angles[7] != self.default_angle_PIN37:
+                self.angles[7] = self.default_angle_PIN37
+                self.publish_angles()
+                time.sleep(1)
+            else:
+                self.get_logger().info("Leg 4 Touch the ground")
+                break
 
     def update_angles(self):
         self.decrease_angles()
